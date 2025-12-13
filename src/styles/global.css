@@ -1,4 +1,4 @@
-body {
+/*body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   direction: rtl;
@@ -27,7 +27,7 @@ body {
   flex: 1;
 }
 
-/* סיידבר */
+
 .app-sidebar {
   width: 280px;
   background-color: #ffffff;
@@ -36,14 +36,12 @@ body {
   box-sizing: border-box;
 }
 
-/* אזור תוכן */
 .app-content {
   flex: 1;
   padding: 16px 24px;
   box-sizing: border-box;
 }
 
-/* רשימת אירועים */
 .event-list {
   list-style: none;
   padding: 0;
@@ -81,12 +79,10 @@ body {
   color: #666;
 }
 
-/* פרטי אירוע */
 .event-details h2 {
   margin-top: 0;
 }
 
-/* כותרת פרטי אירוע + כפתור מחיקת אירוע */
 .event-details-header {
   display: flex;
   justify-content: space-between;
@@ -116,7 +112,7 @@ body {
   border: 1px solid #ddd;
 }
 
-/* טבלת הוצאות */
+
 .expenses-table {
   width: 100%;
   border-collapse: collapse;
@@ -136,7 +132,6 @@ body {
   background-color: #f0f0f0;
 }
 
-/* כפתור מחיקת הוצאה */
 .delete-btn {
   background: #ff4d4d;
   color: white;
@@ -151,7 +146,6 @@ body {
   background: #d93636;
 }
 
-/* כרטיס הוספת הוצאה */
 .add-expense-card {
   background-color: #ffffff;
   border-radius: 8px;
@@ -181,7 +175,6 @@ body {
   border: 1px solid #ccc;
 }
 
-/* כרטיס הוספת אירוע */
 .add-event-card {
   background-color: #ffffff;
   border-radius: 8px;
@@ -209,7 +202,6 @@ body {
   resize: vertical;
 }
 
-/* כפתור כללי */
 .primary-btn {
   padding: 8px 14px;
   border: none;
@@ -228,7 +220,6 @@ body {
   width: 100%;
 }
 
-/* כרטיסים: Top3 / גרף / תובנות */
 .top3-card,
 .category-chart-card,
 .insights-card {
@@ -239,7 +230,6 @@ body {
   border: 1px solid #ddd;
 }
 
-/* Top 3 */
 .top3-list {
   list-style: none;
   padding: 0;
@@ -269,7 +259,7 @@ body {
   width: 24px;
 }
 
-/* תובנות */
+
 .insights-card p {
   margin: 4px 0 0;
   font-size: 14px;
@@ -295,7 +285,6 @@ body {
   border: 1px solid #ccc;
 }
 
-/* טופס עריכת הוצאה */
 .edit-expense-card {
   background-color: #ffffff;
   border-radius: 8px;
@@ -304,7 +293,6 @@ body {
   border: 1px solid #ddd;
 }
 
-/* כפתור משני */
 .secondary-btn {
   padding: 8px 14px;
   border-radius: 6px;
@@ -317,4 +305,399 @@ body {
 
 .secondary-btn:hover {
   background-color: #ebebeb;
+}
+/* =========================
+   Design tokens (סופר חשוב)
+========================= */
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --surface-2: #f1f4f9;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e6e8f0;
+
+  --primary: #3498db;
+  --primary-hover: #2f86c1;
+  --danger: #ff4d4d;
+  --danger-hover: #d93636;
+
+  --radius: 12px;
+  --radius-sm: 10px;
+
+  --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.08);
+
+  --gap: 16px;
+  --gap-sm: 12px;
+
+  --focus: 0 0 0 3px rgba(52, 152, 219, 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;
+    --surface: #111a2e;
+    --surface-2: #0f1930;
+    --text: #e6edf7;
+    --muted: #a7b1c3;
+    --border: #22304c;
+
+    --shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* =========================
+   Base
+========================= */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  direction: rtl;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.4;
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: 10px;
+}
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   Header
+========================= */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(180deg, #2c3e50 0%, #1f2f3d 100%);
+  color: white;
+  padding: 16px 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.2px;
+}
+
+/* =========================
+   Layout
+========================= */
+.app-layout {
+  display: flex;
+  flex: 1;
+  gap: var(--gap);
+  padding: var(--gap);
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Sidebar */
+.app-sidebar {
+  width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  height: fit-content;
+  position: sticky;
+  top: 76px; /* בערך גובה header */
+}
+
+/* Content */
+.app-content {
+  flex: 1;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/* =========================
+   Cards (איחוד!)
+========================= */
+.event-summary,
+.add-expense-card,
+.add-event-card,
+.edit-expense-card,
+.top3-card,
+.category-chart-card,
+.insights-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* =========================
+   Event list
+========================= */
+.event-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.event-list-item {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.event-list-item:hover {
+  background: var(--surface-2);
+  transform: translateY(-1px);
+}
+
+.event-list-item.selected {
+  border-color: rgba(52, 152, 219, 0.55);
+  background: rgba(52, 152, 219, 0.10);
+}
+
+.event-name { font-weight: 650; }
+.event-date { font-size: 12px; color: var(--muted); }
+
+/* =========================
+   Event details header
+========================= */
+.event-details h2 { margin: 0 0 8px; }
+
+.event-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.delete-event-btn {
+  background: var(--danger);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+.delete-event-btn:hover { background: var(--danger-hover); transform: translateY(-1px); }
+
+/* =========================
+   Forms
+========================= */
+.add-expense-form .form-row,
+.add-event-form .form-row {
+  display: flex;
+  gap: var(--gap-sm);
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.add-expense-form label,
+.add-event-form label,
+.filter-item label {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.add-expense-form input,
+.add-expense-form select,
+.add-event-form input,
+.add-event-form textarea,
+.filter-item input,
+.filter-item select {
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.add-expense-form input:focus,
+.add-expense-form select:focus,
+.add-event-form input:focus,
+.add-event-form textarea:focus,
+.filter-item input:focus,
+.filter-item select:focus {
+  outline: none;
+  box-shadow: var(--focus);
+  border-color: rgba(52, 152, 219, 0.55);
+}
+
+.add-event-form textarea { resize: vertical; min-height: 90px; }
+
+/* =========================
+   Buttons
+========================= */
+.primary-btn,
+.secondary-btn,
+.delete-btn {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.primary-btn {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+.primary-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+.primary-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.secondary-btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 14px;
+  margin-inline-start: 8px;
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+.secondary-btn:hover { background: var(--surface-2); transform: translateY(-1px); }
+
+.full-width { width: 100%; }
+
+/* =========================
+   Table (רמה למעלה)
+========================= */
+.expenses-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.expenses-table th,
+.expenses-table td {
+  padding: 10px 12px;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+}
+
+.expenses-table th {
+  background: var(--surface-2);
+  color: var(--muted);
+  font-weight: 650;
+  font-size: 13px;
+}
+
+.expenses-table tr:last-child td { border-bottom: none; }
+
+.delete-btn {
+  background: var(--danger);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+.delete-btn:hover { background: var(--danger-hover); transform: translateY(-1px); }
+
+/* =========================
+   Filters row
+========================= */
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 10px 0 12px;
+}
+
+/* =========================
+   Top3
+========================= */
+.top3-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: grid;
+  gap: 8px;
+}
+
+.top3-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.top3-name { flex: 1; font-weight: 600; }
+.top3-amount { min-width: 130px; text-align: left; font-size: 14px; color: var(--muted); }
+.medal { width: 22px; }
+
+/* =========================
+   Insights
+========================= */
+.insights-card p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 980px) {
+  .app-layout {
+    flex-direction: column;
+    padding: 12px;
+  }
+  .app-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
+
+@media (max-width: 520px) {
+  .app-header { padding: 14px 16px; }
+  .app-header h1 { font-size: 18px; }
+
+  .event-details-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .delete-event-btn { width: 100%; }
 }
