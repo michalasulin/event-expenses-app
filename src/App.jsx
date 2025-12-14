@@ -4,7 +4,10 @@ import EventDetails from "./components/EventDetails/EventDetails.jsx";
 import "./styles/global.css";
 
 // כתובת ה־API של השרת
-const API_BASE_URL = "http://localhost:3001";
+const API_BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3001"
+    : "https://event-expenses-api.onrender.com";
 
 // מיישר את האובייקט שמגיע ממונגו לצורה שהפרונט מצפה אליה
 const normalizeEvent = (event) => ({
